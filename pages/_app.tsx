@@ -22,21 +22,14 @@ import {
 } from "wagmi/chains";
 
 import { publicProvider } from "wagmi/providers/public";
-import { RainbowKitProvider, getDefaultWallets } from "@rainbow-me/rainbowkit";
-// Chains we are going to support
-// Connectores for these chains
-// wagmiclient
+import { RainbowKitProvider } from "@rainbow-me/rainbowkit";
 
 const { chains, provider } = configureChains(
   [mainnet, polygon, optimism, arbitrum, avalanche, bsc, goerli],
   [publicProvider()]
 );
 
-// const { connectors } = getDefaultWallets({
-//   appName: "Rainbow Tutorial",
-//   chains,
-// });
-const projectId: string = "1566a0356dfc3960638ac92753ed3c43";
+const projectId: string = process.env.NEXT_PUBLIC_PROJECT_ID || "";
 const appName: string = "My Rainbow Template App";
 
 const connectors = connectorsForWallets([
