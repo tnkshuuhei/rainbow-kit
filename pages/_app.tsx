@@ -17,10 +17,8 @@ import {
   optimism,
   arbitrum,
   avalanche,
-  zkSync,
   bsc,
   goerli,
-  polygonMumbai,
 } from "wagmi/chains";
 
 import { publicProvider } from "wagmi/providers/public";
@@ -30,7 +28,7 @@ import { RainbowKitProvider, getDefaultWallets } from "@rainbow-me/rainbowkit";
 // wagmiclient
 
 const { chains, provider } = configureChains(
-  [mainnet, polygon, optimism, arbitrum, avalanche, bsc, goerli, polygonMumbai],
+  [mainnet, polygon, optimism, arbitrum, avalanche, bsc, goerli],
   [publicProvider()]
 );
 
@@ -38,16 +36,19 @@ const { chains, provider } = configureChains(
 //   appName: "Rainbow Tutorial",
 //   chains,
 // });
+const projectId: string = "1566a0356dfc3960638ac92753ed3c43";
+const appName: string = "My Rainbow Template App";
+
 const connectors = connectorsForWallets([
   {
-    groupName: "Suggested",
+    groupName: "Recommended",
     wallets: [
       injectedWallet({ chains }),
-      rainbowWallet({ chains }),
-      metaMaskWallet({ chains }),
-      coinbaseWallet({ chains, appName: "My RainbowKit App" }),
-      walletConnectWallet({ chains }),
+      rainbowWallet({ chains, projectId }),
+      metaMaskWallet({ chains, projectId }),
       rabbyWallet({ chains }),
+      coinbaseWallet({ chains, appName }),
+      walletConnectWallet({ chains, projectId }),
     ],
   },
 ]);
