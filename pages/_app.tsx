@@ -1,6 +1,7 @@
 import "@rainbow-me/rainbowkit/styles.css";
 import "@/styles/globals.css";
 import type { AppProps } from "next/app";
+import { StateContextProvider } from "@/context";
 import { connectorsForWallets } from "@rainbow-me/rainbowkit";
 import { WagmiConfig, configureChains, createClient } from "wagmi";
 import {
@@ -55,7 +56,9 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <WagmiConfig client={wagmiClient}>
       <RainbowKitProvider chains={chains} initialChain={mainnet}>
-        <Component {...pageProps} />;
+        <StateContextProvider>
+          <Component {...pageProps} />;
+        </StateContextProvider>
       </RainbowKitProvider>
     </WagmiConfig>
   );
