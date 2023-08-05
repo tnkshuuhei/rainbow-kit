@@ -19,18 +19,24 @@ const sampleContract: any = {
 };
 
 export const StateContextProvider = ({ children }: any) => {
+  ///////////////////////////////////////
+  // Wagmi hooks
+  ///////////////////////////////////////
   const { address, isConnecting, isDisconnected } = useAccount();
   const { data: balance } = useBalance({
     address: address,
   });
   const { data: ensName } = useEnsName({ address: address });
   const { data: ensAvatar } = useEnsAvatar({ address: address });
+
+  ///////////////////////////////////////
+  // Read contract with wagmi
+  ///////////////////////////////////////
   const { data: getBalance }: any = useContractRead({
     ...sampleContract,
     functionName: "balanceOf",
     args: [address],
   });
-
   const { data: getTokenContract }: any = useContractReads({
     contracts: [
       {
@@ -48,6 +54,7 @@ export const StateContextProvider = ({ children }: any) => {
       },
     ],
   });
+
   if (getTokenContract !== undefined) {
     console.log(
       "getbalance: ",
@@ -55,6 +62,10 @@ export const StateContextProvider = ({ children }: any) => {
       getTokenContract[2].toString()
     );
   }
+
+  ///////////////////////////////////////
+  // Execute contract with wagmi
+  ///////////////////////////////////////
   const { config }: any = usePrepareContractWrite({
     ...sampleContract,
     functionName: "transfer",
