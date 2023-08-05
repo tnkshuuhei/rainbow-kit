@@ -20,13 +20,25 @@ import {
   avalanche,
   bsc,
   goerli,
+  optimismGoerli,
 } from "wagmi/chains";
 
 import { publicProvider } from "wagmi/providers/public";
 import { RainbowKitProvider } from "@rainbow-me/rainbowkit";
 
 const { chains, provider } = configureChains(
-  [mainnet, polygon, optimism, arbitrum, avalanche, bsc, goerli],
+  [
+    /*
+		mainnet,
+    polygon,
+    optimism,
+    arbitrum,
+    avalanche,
+    bsc,
+		*/
+    goerli,
+    optimismGoerli,
+  ],
   [publicProvider()]
 );
 
